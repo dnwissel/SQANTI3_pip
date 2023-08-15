@@ -55,14 +55,11 @@ try:
     from .sequence.sam_to_gff3 import convert_sam_to_gff3
     from .sequence.STAR import STARJunctionReader
     from .sequence.BED import LazyBEDPointReader
-    from .sequence import coordinate_mapper as cordmap
 except ImportError as e:
     raise e
 
 try:
     from cupcake.tofu.compare_junctions import compare_junctions
-    from cupcake.tofu.filter_away_subset import read_count_file
-    from cupcake.io.BioReaders import GMAPSAMReader
     from cupcake.io.GFF import collapseGFFReader, write_collapseGFF_format
 except ImportError:
     print("Unable to import cupcake.tofu! Please make sure you install cupcake.", file=sys.stderr)

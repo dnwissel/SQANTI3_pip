@@ -2,12 +2,14 @@
 
 __version__ = '1.0'
 
-import os, sys
-from Bio.Seq import Seq
-from Bio import SeqIO
-import coordinate_mapper as sp
-import BioReaders
+import os
+import sys
 
+from Bio import SeqIO
+from Bio.Seq import Seq
+
+from .BioReaders import GMAPSAMReader
+from .coordinate_mapper import consistute_genome_seq_from_exons
 
 ###### MODIFY FILENAME BELOW #######
 #genome_file = 'hg38.fa'
@@ -25,10 +27,10 @@ def err_correct(genome_file, sam_file, output_err_corrected_fasta, genome_dict=N
         print("done reading {0}".format(genome_file), file=sys.stderr)
 
     f = open(output_err_corrected_fasta, 'w')
-    reader = BioReaders.GMAPSAMReader(sam_file, True)
+    reader = GMAPSAMReader(sam_file, True)
     for r in reader:
         if r.sID == '*': continue
-        seq = sp.consistute_genome_seq_from_exons(genome_dict, r.sID, r.segments, r.flag.strand)
+        seq = consistute_genome_seq_from_exons(genome_dict, r.sID, r.segments, r.flag.strand)
         f.write(">{0}\n{1}\n".format(r.qID, seq))
 
     f.close()
