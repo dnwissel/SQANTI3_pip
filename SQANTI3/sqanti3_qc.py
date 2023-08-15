@@ -82,7 +82,7 @@ ULTRA_CMD = "uLTRA pipeline {g} {a} {i} {o_dir} --t {cpus} --prefix {prefix} --i
 GMSP_PROG = os.path.join(utilitiesPath, "gmst", "gmst.pl")
 GMST_CMD = "perl " + GMSP_PROG + " -faa --strand direct --fnn --output {o} {i}"
 
-GTF2GENEPRED_PROG = os.path.join(utilitiesPath,"gtfToGenePred")
+GTF2GENEPRED_PROG = "gtfToGenePred"
 GFFREAD_PROG = "gffread"
 
 if distutils.spawn.find_executable(GTF2GENEPRED_PROG) is None:
