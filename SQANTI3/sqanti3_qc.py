@@ -25,9 +25,10 @@ from multiprocessing import Process
 
 utilitiesPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "utilities")
 sys.path.insert(0, utilitiesPath)
-from rt_switching import rts
-from indels_annot import calc_indels_from_sam
-from short_reads import *
+
+from .utilities.rt_switching import rts
+from .utilities.indels_annot import calc_indels_from_sam
+from .utilities.short_reads import *
 
 try:
     from Bio.Seq import Seq
@@ -50,14 +51,13 @@ except ImportError:
     sys.exit(-1)
 
 try:
-    from err_correct_w_genome import err_correct
-    from sam_to_gff3 import convert_sam_to_gff3
-    from STAR import STARJunctionReader
-    from BED import LazyBEDPointReader
-    import coordinate_mapper as cordmap
-except ImportError:
-    print("Unable to import err_correct_w_genome or sam_to_gff3.py! Please make sure cDNA_Cupcake/sequence/ is in $PYTHONPATH.", file=sys.stderr)
-    sys.exit(-1)
+    from .sequence.err_correct_w_genome import err_correct
+    from .sequence.sam_to_gff3 import convert_sam_to_gff3
+    from .sequence.STAR import STARJunctionReader
+    from .sequence.BED import LazyBEDPointReader
+    from .sequence import coordinate_mapper as cordmap
+except ImportError as e:
+    raise e
 
 try:
     from cupcake.tofu.compare_junctions import compare_junctions
