@@ -17,7 +17,7 @@ import argparse
 import math
 import csv
 import numpy as np
-from scipy import mean
+from scipy.stats import mean
 from collections import defaultdict, Counter, namedtuple
 from collections.abc import Iterable
 from csv import DictWriter, DictReader
